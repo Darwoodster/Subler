@@ -642,14 +642,25 @@ public struct iTunesStore: MetadataService {
     // MARK: - Load additional metadata
 
     public func loadTVMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        return loadTVMetadata(metadata, language: language, includeArtwork: true)
+    }
+
+    public func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        return loadTVMetadata(metadata, language: language, includeArtwork: false)
+    }
+
+    private func loadTVMetadata(_ metadata: MetadataResult, language: String, includeArtwork: Bool) -> MetadataResult {
         guard let store = Store(language: language),
               let playlistID = metadata[.playlistID] as? Int,
               let url = URL(string: "https://itunes.apple.com/lookup?country=\(store.country2)&lang=\(store.language2.lowercased())&id=\(playlistID)")
             else { return metadata }
         
-        if let results = sendJSONRequest(url: url, type: Wrapper<Collection>.self) {
+        if (includeArtwork || metadata[.seriesDescription] == nil),
+           let results = sendJSONRequest(url: url, type: Wrapper<Collection>.self) {
             metadata[.seriesDescription] = results.results.first?.longDescription
         }
+
+        guard includeArtwork else { return metadata }
 
         guard let tvShow = metadata[.seriesName] as? String,
               let season = metadata[.season] as? Int else { return metadata }

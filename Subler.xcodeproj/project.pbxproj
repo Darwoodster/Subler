@@ -143,6 +143,13 @@
 		A9F7F8E01837C44B0036AE7E /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ED7B21180067A2008FD3A8 /* IOKit.framework */; };
 		A9FC6FF61EF2E3280034CCED /* TheTVDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC6FF51EF2E3280034CCED /* TheTVDBService.swift */; };
 		CD71FEA612F1B62600F0A98D /* MetadataSearch.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD71FEA412F1B62600F0A98D /* MetadataSearch.xib */; };
+		C0DE00000000000000000001 /* DocumentEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000011 /* DocumentEditorViewController.swift */; };
+		C0DE00000000000000000002 /* WorkspaceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000012 /* WorkspaceWindowController.swift */; };
+		C0DE00000000000000000003 /* WorkspaceBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000013 /* WorkspaceBatchViewController.swift */; };
+		C0DE00000000000000000004 /* WorkspaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000014 /* WorkspaceTests.swift */; };
+		C0DE00000000000000000005 /* MP42Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A925AA8218378D7900BE84D4 /* MP42Foundation.framework */; };
+		C0DE00000000000000000006 /* WorkspaceSeasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000016 /* WorkspaceSeasonViewController.swift */; };
+		C0DE00000000000000000007 /* WorkspaceSeasonContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000017 /* WorkspaceSeasonContext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +174,7 @@
 			remoteGlobalIDString = A910B5A318394E900064028F;
 			remoteInfo = mp42;
 		};
+		C0DE00000000000000000020 /* PBXContainerItemProxy */ = {isa = PBXContainerItemProxy; containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */; proxyType = 1; remoteGlobalIDString = 8D15AC270486D014006FF6A4; remoteInfo = Subler; };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -513,6 +521,13 @@
 		A9F5820B1DCC861F005F3E92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9F680A61FD06E0200018371 /* OutputPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutputPrefsViewController.swift; path = Classes/OutputPrefsViewController.swift; sourceTree = "<group>"; };
 		A9FC6FF51EF2E3280034CCED /* TheTVDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TheTVDBService.swift; path = Classes/MetadataImporters/TheTVDBService.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000011 /* DocumentEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DocumentEditorViewController.swift; path = Classes/DocumentEditorViewController.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000012 /* WorkspaceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceWindowController.swift; path = Classes/WorkspaceWindowController.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000013 /* WorkspaceBatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceBatchViewController.swift; path = Classes/WorkspaceBatchViewController.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000014 /* WorkspaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests/WorkspaceTests.swift; sourceTree = SOURCE_ROOT; };
+		C0DE00000000000000000015 /* WorkspaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkspaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE00000000000000000016 /* WorkspaceSeasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceSeasonViewController.swift; path = Classes/WorkspaceSeasonViewController.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000017 /* WorkspaceSeasonContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceSeasonContext.swift; path = Classes/WorkspaceSeasonContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +542,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0DE00000000000000000021 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (C0DE00000000000000000005 /* MP42Foundation.framework in Frameworks */, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -543,6 +559,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000015 /* WorkspaceTests.xctest */,
 				8D15AC370486D014006FF6A4 /* Subler.app */,
 			);
 			name = Products;
@@ -551,6 +568,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* MP4Sub */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000014 /* WorkspaceTests.swift */,
 				4AFFB6D12DF751110099E229 /* Subler.sdef */,
 				A9B4EE4E1643EBF3009AF6BC /* Subler.entitlements */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
@@ -565,6 +583,11 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE00000000000000000011 /* DocumentEditorViewController.swift */,
+				C0DE00000000000000000012 /* WorkspaceWindowController.swift */,
+				C0DE00000000000000000013 /* WorkspaceBatchViewController.swift */,
+				C0DE00000000000000000016 /* WorkspaceSeasonViewController.swift */,
+				C0DE00000000000000000017 /* WorkspaceSeasonContext.swift */,
 				A9FAC5FE1BAC3BAC00525E42 /* Document */,
 				A9AF6A7818D0537F00FAAB08 /* Queue */,
 				A9915ABB1F4B26A5003C57D1 /* Presets */,
@@ -823,6 +846,17 @@
 			productReference = 8D15AC370486D014006FF6A4 /* Subler.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C0DE00000000000000000024 /* WorkspaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0DE00000000000000000025 /* Build configuration list for PBXNativeTarget "WorkspaceTests" */;
+			buildPhases = (C0DE00000000000000000022 /* Sources */, C0DE00000000000000000021 /* Frameworks */, );
+			buildRules = ();
+			dependencies = (C0DE00000000000000000023 /* PBXTargetDependency */, );
+			name = WorkspaceTests;
+			productName = WorkspaceTests;
+			productReference = C0DE00000000000000000015 /* WorkspaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -832,6 +866,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
+					C0DE00000000000000000024 = {CreatedOnToolsVersion = 27.0; TestTargetID = 8D15AC270486D014006FF6A4; };
 					8D15AC270486D014006FF6A4 = {
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
@@ -874,6 +909,7 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Subler */,
+				C0DE00000000000000000024 /* WorkspaceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -954,6 +990,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DE00000000000000000001 /* DocumentEditorViewController.swift in Sources */,
+				C0DE00000000000000000002 /* WorkspaceWindowController.swift in Sources */,
+				C0DE00000000000000000003 /* WorkspaceBatchViewController.swift in Sources */,
+				C0DE00000000000000000006 /* WorkspaceSeasonViewController.swift in Sources */,
+				C0DE00000000000000000007 /* WorkspaceSeasonContext.swift in Sources */,
 				A959001A202AF21800FD8F23 /* ProgressViewController.swift in Sources */,
 				A91576EB204ECA6E00D93CE7 /* Token.swift in Sources */,
 				A9676A341FB6EAAD00C1E300 /* ItemViewController.swift in Sources */,
@@ -1044,6 +1085,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0DE00000000000000000022 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (C0DE00000000000000000004 /* WorkspaceTests.swift in Sources */, ); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1052,6 +1094,7 @@
 			name = MP42Foundation;
 			targetProxy = A925AA8618378DC400BE84D4 /* PBXContainerItemProxy */;
 		};
+		C0DE00000000000000000023 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = 8D15AC270486D014006FF6A4 /* Subler */; targetProxy = C0DE00000000000000000020 /* PBXContainerItemProxy */; };
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1561,7 +1604,8 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.galad.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(SUBLER_APP_BUNDLE_IDENTIFIER)";
+				SUBLER_APP_BUNDLE_IDENTIFIER = "org.galad.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = Subler;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/MP42Foundation/contrib/mp4v2/";
@@ -1606,7 +1650,8 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.galad.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(SUBLER_APP_BUNDLE_IDENTIFIER)";
+				SUBLER_APP_BUNDLE_IDENTIFIER = "org.galad.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = Subler;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/MP42Foundation/contrib/mp4v2/";
@@ -1790,6 +1835,40 @@
 			};
 			name = Release;
 		};
+		C0DE00000000000000000026 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@loader_path/../Frameworks", "@executable_path/../Frameworks", );
+				PRODUCT_BUNDLE_IDENTIFIER = org.subler.WorkspaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/MP42Foundation/contrib/mp4v2/";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Subler.app/Contents/MacOS/Subler";
+			};
+			name = Debug;
+		};
+		C0DE00000000000000000027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@loader_path/../Frameworks", "@executable_path/../Frameworks", );
+				PRODUCT_BUNDLE_IDENTIFIER = org.subler.WorkspaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/MP42Foundation/contrib/mp4v2/";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Subler.app/Contents/MacOS/Subler";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1810,6 +1889,12 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C0DE00000000000000000025 /* Build configuration list for PBXNativeTarget "WorkspaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (C0DE00000000000000000026 /* Debug */, C0DE00000000000000000027 /* Release */, );
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

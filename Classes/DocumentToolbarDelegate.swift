@@ -29,7 +29,7 @@ class DocumentToolbarDelegate: NSObject, NSToolbarDelegate {
                                      image: "NSAddTemplate",
                                      symbolName: "doc.badge.plus",
                                      target: target,
-                                     action: #selector(DocumentWindowController.selectFile(_:)))
+                                     action: #selector(DocumentEditorViewController.selectFile(_:)))
         } else if itemIdentifier == .deleteTracks {
             return ButtonToolbarItem(itemIdentifier: itemIdentifier,
                                      label: NSLocalizedString("Delete", comment: "Toolbar"),
@@ -37,13 +37,13 @@ class DocumentToolbarDelegate: NSObject, NSToolbarDelegate {
                                      image: "NSRemoveTemplate",
                                      symbolName: "nosign",
                                      target: target,
-                                     action: #selector(DocumentWindowController.deleteTrack(_:)))
+                                     action: #selector(DocumentEditorViewController.deleteTrack(_:)))
         } else if itemIdentifier == .actions {
             let submenu = NSMenu()
 
             let menuItem = NSMenuItem()
             menuItem.title = NSLocalizedString("At the Beginning", comment: "Toolbar")
-            menuItem.action =  #selector(DocumentWindowController.addChaptersEvery(_:))
+            menuItem.action =  #selector(DocumentEditorViewController.addChaptersEvery(_:))
             menuItem.tag = -1
             submenu.addItem(menuItem)
 
@@ -53,7 +53,7 @@ class DocumentToolbarDelegate: NSObject, NSToolbarDelegate {
                                         String(format: NSLocalizedString("%@ minutes", comment: "Toolbar"), "\(minutes)")
 
                 menuItem.title = title
-                menuItem.action =  #selector(DocumentWindowController.addChaptersEvery(_:))
+                menuItem.action =  #selector(DocumentEditorViewController.addChaptersEvery(_:))
                 menuItem.tag = minutes
                 submenu.addItem(menuItem)
             }
@@ -66,20 +66,20 @@ class DocumentToolbarDelegate: NSObject, NSToolbarDelegate {
             menu.addItem(chapters)
             menu.addItem(NSMenuItem.separator())
             menu.addItem(withTitle: NSLocalizedString("Organize alternate groups", comment: "Toolbar"),
-                         action: #selector(DocumentWindowController.iTunesFriendlyTrackGroups(_:)),
+                         action: #selector(DocumentEditorViewController.iTunesFriendlyTrackGroups(_:)),
                          keyEquivalent: "")
             menu.addItem(withTitle: NSLocalizedString("Clear tracks names", comment: "Toolbar"),
-                         action: #selector(DocumentWindowController.clearTrackNames(_:)),
+                         action: #selector(DocumentEditorViewController.clearTrackNames(_:)),
                          keyEquivalent: "")
             menu.addItem(withTitle: NSLocalizedString("Prettify audio track names", comment: "Toolbar"),
-                         action: #selector(DocumentWindowController.prettifyAudioTrackNames(_:)),
+                         action: #selector(DocumentEditorViewController.prettifyAudioTrackNames(_:)),
                          keyEquivalent: "")
             menu.addItem(withTitle: NSLocalizedString("Fix audio fallbacks", comment: "Toolbar"),
-                         action: #selector(DocumentWindowController.fixAudioFallbacks(_:)),
+                         action: #selector(DocumentEditorViewController.fixAudioFallbacks(_:)),
                          keyEquivalent: "")
             menu.addItem(NSMenuItem.separator())
             menu.addItem(withTitle: NSLocalizedString("Offset…", comment: "Toolbar"),
-                         action: #selector(DocumentWindowController.showTrackOffsetSheet(_:)),
+                         action: #selector(DocumentEditorViewController.showTrackOffsetSheet(_:)),
                          keyEquivalent: "")
 
             let label = NSLocalizedString("Action", comment: "Toolbar")
@@ -126,7 +126,7 @@ class DocumentToolbarDelegate: NSObject, NSToolbarDelegate {
                                      image: "NSRevealFreestandingTemplate",
                                      symbolName: "doc.text.magnifyingglass",
                                      target: target,
-                                     action: #selector(DocumentWindowController.searchMetadata(_:)))
+                                     action: #selector(DocumentEditorViewController.searchMetadata(_:)))
         } else if itemIdentifier == .sendToQueue {
             return ButtonToolbarItem(itemIdentifier: itemIdentifier,
                                      label: NSLocalizedString("Send to Queue", comment: "Toolbar"),

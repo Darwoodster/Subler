@@ -670,6 +670,12 @@ public struct AppleTVv3: MetadataService {
         return details(metadata)
     }
 
+    public func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        // The season's episode records already carry episode text and credits.
+        // details enriches shared season/show information and season artwork.
+        return metadata
+    }
+
     public func search(movie: String, language: String) -> [MetadataResult] {
 
         if let storefront = Storefront.getStorefront(from: language) {

@@ -10,9 +10,20 @@ import MP42Foundation
 
 final class DocumentController : NSDocumentController {
 
+    override var currentDocument: NSDocument? {
+        if let workspace = NSApp.keyWindow?.windowController as? WorkspaceWindowController {
+            return workspace.activeDocument
+        }
+        return super.currentDocument
+    }
+
     private var openPanel: NSOpenPanel?
 
     override func openDocument(_ sender: Any?) {
+        if let workspace = NSApp.keyWindow?.windowController as? WorkspaceWindowController {
+            workspace.addFiles(sender)
+            return
+        }
         if let openPanel = self.openPanel {
             openPanel.makeKeyAndOrderFront(self)
         } else {
@@ -57,7 +68,7 @@ final class DocumentController : NSDocumentController {
     }
 
     override func document(for url: URL) -> NSDocument? {
-        return self.documents.first { $0.fileURL == url }
+        return self.documents.first { $0.fileURL.map { WorkspaceWindowController.sameFile($0, url) } == true }
     }
 }
 
@@ -69,6 +80,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     @MainActor private lazy var prefsController: PrefsWindowController = {
         return PrefsWindowController()
     }()
+
+    private var workspaceController: WorkspaceWindowController?
+
+    @IBAction func showUnifiedWorkspace(_ sender: Any?) {
+        let workspace = workspaceController ?? WorkspaceWindowController()
+        workspaceController = workspace
+        workspace.showWindow(sender)
+        workspace.window?.makeKeyAndOrderFront(sender)
+        workspace.restoreCollection()
+    }
 
     private let logger = Logger.shared
 
@@ -179,6 +200,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if workspaceController?.isProcessing == true || workspaceController?.isImporting == true {
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("Workspace processing is in progress", comment: "Workspace quit")
+            alert.informativeText = NSLocalizedString("Wait for the current workspace operation to finish before quitting.", comment: "Workspace quit")
+            alert.runModal()
+            return .terminateCancel
+        }
         let state = QueueController.shared.status
 
         if state == .working {

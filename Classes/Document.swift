@@ -12,6 +12,19 @@ import MP42Foundation
 @objc(SBDocument)
 final class Document: NSDocument {
 
+    // Presentation is separate from document ownership; workspace documents have no document window.
+    weak var editorController: DocumentEditorViewController?
+    weak var workspaceWindowController: WorkspaceWindowController?
+
+    override var windowForSheet: NSWindow? {
+        return workspaceWindowController?.window ?? super.windowForSheet
+    }
+
+    override func showWindows() {
+        if let workspace = workspaceWindowController { workspace.showDocument(self) }
+        else { super.showWindows() }
+    }
+
     private(set) var mp4: MP42File
     private var unsupportedMp4Brand: Bool
 
@@ -41,7 +54,15 @@ final class Document: NSDocument {
         self.mp4.undo = undoManager
     }
 
+    override func close() {
+        let workspace = workspaceWindowController
+        super.close()
+        workspaceWindowController = nil
+        workspace?.documentDidClose(self)
+    }
+
     override func makeWindowControllers() {
+        if workspaceWindowController != nil { return }
         let documentWindowController = DocumentWindowController()
         addWindowController(documentWindowController)
         documentWindowController.showWindow(self)
@@ -72,11 +93,9 @@ final class Document: NSDocument {
         mp4 = try MP42File(url: url)
         mp4.undo = undoManager
 
-        if let docController = windowControllers.first as? DocumentWindowController {
-            docController.reloadData()
-            undoManager?.removeAllActions()
-        }
-
+        editorController?.reloadData()
+        undoManager?.removeAllActions()
+        workspaceWindowController?.didRevert(self)
         updateChangeCount(.changeCleared)
     }
 
@@ -86,6 +105,7 @@ final class Document: NSDocument {
 
     private var optimize: Bool
     private var options: [String : Any]
+    private(set) var isSaving = false
     private var cancelled: Bool
 
     private func saveOptions(for saveOperation: NSDocument.SaveOperationType) -> [String : Any] {
@@ -118,13 +138,27 @@ final class Document: NSDocument {
     override func canAsynchronouslyWrite(to url: URL, ofType typeName: String, for saveOperation: NSDocument.SaveOperationType) -> Bool { return true }
 
     override func save(to url: URL, ofType typeName: String, for saveOperation: NSDocument.SaveOperationType, completionHandler: @escaping (Error?) -> Void) {
-        let docController = windowControllers.first as? DocumentWindowController
+        guard !isSaving else {
+            completionHandler(NSError(domain: "Subler", code: 1, userInfo: [NSLocalizedDescriptionKey: "This document is already being saved."]))
+            return
+        }
+        if let error = workspaceWindowController?.prepareToSave(self, to: url, operation: saveOperation) {
+            completionHandler(error)
+            return
+        }
+        isSaving = true
+        let docController = editorController
+        let finish: (Error?) -> Void = { error in
+            self.isSaving = false
+            self.workspaceWindowController?.didFinishSaving(self, error: error)
+            completionHandler(error)
+        }
 
         let modifiedCompletionhandler = { (error: Error?) -> Void in
             docController?.endProgressReporting()
 
             if let error = error {
-                completionHandler(error);
+                finish(error)
             } else {
                 do {
                     let reloadedFile = try MP42File(url: url)
@@ -132,9 +166,9 @@ final class Document: NSDocument {
                     self.mp4.undo = self.undoManager
                     self.undoManager?.removeAllActions()
                     docController?.reloadData()
-                    completionHandler(error)
+                    finish(error)
                 } catch {
-                    completionHandler(error)
+                    finish(error)
                 }
             }
         }
@@ -198,7 +232,7 @@ final class Document: NSDocument {
 
         if optimize && cancelled == false {
             DispatchQueue.main.async {
-                let docController = self.windowControllers.first as? DocumentWindowController
+                let docController = self.editorController
                 docController?.setProgress(title: NSLocalizedString("Optimizing…", comment: "Document Optimize sheet."))
             }
             mp4.optimize()

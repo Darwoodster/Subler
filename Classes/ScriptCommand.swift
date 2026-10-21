@@ -39,6 +39,11 @@ extension ScriptCommandDocumentTargeting where Self: NSScriptCommand {
             return windowController.document as? Document
         }
 
+        if let window = self.receiversSpecifier?.objectsByEvaluatingSpecifier as? NSWindow,
+           let workspace = window.windowController as? WorkspaceWindowController {
+            return workspace.activeDocument
+        }
+
         // Finally, fall back to current document (frontmost)
         return NSDocumentController.shared.currentDocument as? Document
     }
@@ -82,7 +87,7 @@ class SBImportFileScriptCommand: NSScriptCommand, ScriptCommandDocumentTargeting
         let fileURL = URL(fileURLWithPath: path)
         
         // Import directly into the target document
-        if let windowController = doc.windowControllers.first {
+        if let windowController = doc.editorController {
             let selector = NSSelectorFromString("importFilesDirectly:")
             if windowController.responds(to: selector) {
                 let fileURLs = [fileURL]
@@ -121,7 +126,7 @@ class SBFetchMetadataScriptCommand: NSScriptCommand, ScriptCommandDocumentTarget
                     mp4File.metadata.merge(metadata, overwrite: true)
 
                     // Trigger UI refresh by calling reloadData on the window controller
-                    if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+                    if let windowController = sublerDoc.editorController {
                         windowController.reloadData()
                     }
                     
@@ -254,7 +259,7 @@ class SBOrganizeAlternateGroupsScriptCommand: NSScriptCommand, ScriptCommandDocu
         }
         
         // Use the existing IBAction instead of duplicating logic
-        if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+        if let windowController = sublerDoc.editorController {
             windowController.iTunesFriendlyTrackGroups(self)
             logger.write(toLog: "Script successfully organized alternate groups")
         } else {
@@ -276,7 +281,7 @@ class SBClearTrackNamesScriptCommand: NSScriptCommand, ScriptCommandDocumentTarg
         }
         
         // Use the existing IBAction instead of duplicating logic
-        if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+        if let windowController = sublerDoc.editorController {
             windowController.clearTrackNames(self)
             logger.write(toLog: "Script successfully cleared all track names")
         } else {
@@ -298,7 +303,7 @@ class SBPrettifyAudioTrackNamesScriptCommand: NSScriptCommand, ScriptCommandDocu
         }
         
         // Use the existing IBAction instead of duplicating logic
-        if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+        if let windowController = sublerDoc.editorController {
             windowController.prettifyAudioTrackNames(self)
             logger.write(toLog: "Script successfully prettified audio track names")
         } else {
@@ -320,7 +325,7 @@ class SBFixAudioFallbacksScriptCommand: NSScriptCommand, ScriptCommandDocumentTa
         }
         
         // Use the existing IBAction instead of duplicating logic
-        if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+        if let windowController = sublerDoc.editorController {
             windowController.fixAudioFallbacks(self)
             logger.write(toLog: "Script successfully fixed audio fallbacks")
         } else {
@@ -357,7 +362,7 @@ class SBSaveAsScriptCommand: NSScriptCommand, ScriptCommandDocumentTargeting {
         options[MP4264BitTime] = Prefs.mp464bitTimes
         
         // Get the window controller for progress reporting
-        guard let windowController = sublerDoc.windowControllers.first as? DocumentWindowController else {
+        guard let windowController = sublerDoc.editorController else {
             logger.write(toLog: "No window controller found for progress reporting")
             return nil
         }
@@ -707,7 +712,7 @@ class SBFetchAndSetMetadataResultScriptCommand: NSScriptCommand, ScriptCommandDo
             DispatchQueue.main.async {
                 if success {
                     // Trigger UI refresh
-                    if let windowController = sublerDoc.windowControllers.first as? DocumentWindowController {
+                    if let windowController = sublerDoc.editorController {
                         windowController.reloadData()
                     }
                     logger.write(toLog: "Successfully set metadata result \(resultIndex)")

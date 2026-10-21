@@ -60,10 +60,19 @@ public protocol MetadataService {
     func search(tvShow: String, language: String) -> [String]
     func search(tvShow: String, language: String, season: Int?, episode: Int?) -> [MetadataResult]
     func loadTVMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult
+    func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult
 
     func search(movie: String, language: String) -> [MetadataResult]
     func loadMovieMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult
 
+}
+
+public extension MetadataService {
+    /// An optional focused path for callers that already own a season and its artwork.
+    /// Existing services retain their behavior until they provide an episode-only implementation.
+    func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        return loadTVMetadata(metadata, language: language)
+    }
 }
 
 public enum MetadataNameSearch {

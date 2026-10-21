@@ -61,7 +61,7 @@ private extension MetadataResult {
         self[.iTunesURL]       = episode.showURL
         self[.serviceContentID] = episode.showID
 
-        if let releaseDate = item.releaseDate {
+        if self[.releaseDate] == nil, let releaseDate = item.releaseDate {
             self[.releaseDate] = Date(timeIntervalSince1970: releaseDate / 1000)
         }
 
@@ -205,6 +205,12 @@ public struct AppleTV: MetadataService {
 
     public func loadTVMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
         return loadDetails(metadata, language: language)
+    }
+
+    public func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        // Episode titles and descriptions are already in the season response.
+        // loadDetails fetches shared show details and season artwork again.
+        return metadata
     }
 
     // MARK: - Movie search

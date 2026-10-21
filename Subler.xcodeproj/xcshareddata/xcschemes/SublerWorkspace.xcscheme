@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme LastUpgradeVersion="2700" version="1.3">
+   <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+      <BuildActionEntries>
+         <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="8D15AC270486D014006FF6A4" BuildableName="Subler.app" BlueprintName="Subler" ReferencedContainer="container:Subler.xcodeproj"/>
+         </BuildActionEntry>
+         <BuildActionEntry buildForTesting="YES" buildForRunning="NO" buildForProfiling="NO" buildForArchiving="NO" buildForAnalyzing="YES">
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="C0DE00000000000000000024" BuildableName="WorkspaceTests.xctest" BlueprintName="WorkspaceTests" ReferencedContainer="container:Subler.xcodeproj"/>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB" shouldUseLaunchSchemeArgsEnv="NO">
+      <Testables>
+         <TestableReference skipped="NO" parallelizable="NO">
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="C0DE00000000000000000024" BuildableName="WorkspaceTests.xctest" BlueprintName="WorkspaceTests" ReferencedContainer="container:Subler.xcodeproj"/>
+         </TestableReference>
+      </Testables>
+      <CommandLineArguments>
+         <CommandLineArgument argument="-SBShowOpenPanelAtLaunch NO" isEnabled="YES"/>
+         <CommandLineArgument argument="-SBShowQueueWindow NO" isEnabled="YES"/>
+      </CommandLineArguments>
+   </TestAction>
+   <LaunchAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB" launchStyle="0" useCustomWorkingDirectory="NO" ignoresPersistentStateOnLaunch="YES" debugDocumentVersioning="YES" debugServiceExtension="internal" allowLocationSimulation="YES">
+      <BuildableProductRunnable runnableDebuggingMode="0">
+         <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="8D15AC270486D014006FF6A4" BuildableName="Subler.app" BlueprintName="Subler" ReferencedContainer="container:Subler.xcodeproj"/>
+      </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument argument="-SBShowOpenPanelAtLaunch NO" isEnabled="YES"/>
+         <CommandLineArgument argument="-SBShowQueueWindow NO" isEnabled="YES"/>
+      </CommandLineArguments>
+   </LaunchAction>
+   <ProfileAction buildConfiguration="Release" shouldUseLaunchSchemeArgsEnv="YES" savedToolIdentifier="" useCustomWorkingDirectory="NO" debugDocumentVersioning="YES">
+      <BuildableProductRunnable runnableDebuggingMode="0">
+         <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="8D15AC270486D014006FF6A4" BuildableName="Subler.app" BlueprintName="Subler" ReferencedContainer="container:Subler.xcodeproj"/>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction buildConfiguration="Debug"/>
+   <ArchiveAction buildConfiguration="Release" revealArchiveInOrganizer="YES"/>
+</Scheme>

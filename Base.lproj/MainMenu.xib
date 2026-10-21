@@ -87,6 +87,12 @@
                                     <action selector="newDocument:" target="-1" id="556"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Unified Workspace" keyEquivalent="n" id="workspace-menu">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="showUnifiedWorkspace:" target="-1" id="workspace-action"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="372"/>

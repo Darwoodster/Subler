@@ -187,10 +187,12 @@ public struct TheTVDB : MetadataService {
             switch (artworkType?.name, artworkType?.recordType) {
             case ("Poster", "series"):
                 type = .poster
-            case ("Poster", "season"):
-                type = .season
-            case ("Background", "series"),
-                ("Background", "season"):
+            case (_, "season"):
+                // These records use an internal season ID, not the episode's
+                // season number. The series schema does not currently decode
+                // that mapping, so it cannot safely identify this season's art.
+                continue
+            case ("Background", "series"):
                 type = .backdrop
             default:
                 break
@@ -390,6 +392,14 @@ public struct TheTVDB : MetadataService {
     }
 
     public func loadTVMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        return loadTVMetadata(metadata, language: language, includeArtwork: true)
+    }
+
+    public func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        return loadTVMetadata(metadata, language: language, includeArtwork: false)
+    }
+
+    private func loadTVMetadata(_ metadata: MetadataResult, language: String, includeArtwork: Bool) -> MetadataResult {
         guard let id = metadata[.serviceEpisodeID] as? Int else { return metadata }
 
         var artworks: [Artwork] = []
@@ -407,10 +417,12 @@ public struct TheTVDB : MetadataService {
                 metadata[.cast] = guests
             }
 
-            if let path = info.image, let url = URL(string: path) {
+            if includeArtwork, let path = info.image, let url = URL(string: path) {
                 artworks.append(Artwork(url: url, thumbURL: url, service: self.name, type: .episode, size: .rectangle))
             }
         }
+
+        guard includeArtwork else { return metadata }
 
         // Get additionals images
         if ((metadata[.season] as? Int) != nil) {

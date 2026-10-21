@@ -22,3 +22,8 @@ DerivedData
 
 # CocoaPods
 Pods
+
+# Shared workspace test scheme
+!Subler.xcodeproj/xcshareddata/
+!Subler.xcodeproj/xcshareddata/xcschemes/
+!Subler.xcodeproj/xcshareddata/xcschemes/*.xcscheme

@@ -350,6 +350,12 @@ public struct TheMovieDB: MetadataService {
         return results
     }
 
+    public func loadTVEpisodeMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
+        // The season response already includes episode descriptions and credits.
+        // The additional TV metadata path only searches for artwork.
+        return metadata
+    }
+
     public func loadTVMetadata(_ metadata: MetadataResult, language: String) -> MetadataResult {
         var artworks: [Artwork] = []
 
